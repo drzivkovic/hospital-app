@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component } from "@angular/core";
+import { NgForm } from '@angular/forms';
+import { PostService } from "../post.service";
 
 @Component({
   selector: 'app-post-create',
@@ -10,14 +12,11 @@ export class PostCreateComponent {
   patientName = '';
   treatment = '';
 
-  @Output() postCreated = new EventEmitter();
+  constructor(public postsService: PostService) {}
 
-  onAddPost() {
-    const post = {
-      doctorName: this.doctorName,
-      patientName: this.patientName,
-      treatment: this.treatment
-    };
-    this.postCreated.emit(post);
+  onAddPost(form: NgForm) {
+    if (form.invalid) return;
+
+    this.postsService.addPost(form.value.doctorName, form.value.patientName, form.value.treatment);
   }
 }

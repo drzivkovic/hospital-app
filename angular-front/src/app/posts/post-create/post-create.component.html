@@ -1,16 +1,39 @@
 <mat-card>
-  <mat-form-field>
-    <input matInput type="text" [(ngModel)]="doctorName" placeholder="Doctor's first and last name">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput type="text" [(ngModel)]="patientName" placeholder="Patient name">
-  </mat-form-field>
-  <mat-form-field>
-    <textarea matInput row="6" [(ngModel)]="treatment" placeholder="Treatment"></textarea>
-  </mat-form-field>
-  <button
-    color="primary"
-    mat-raised-button (click)="onAddPost()">Save Doctor</button>
+  <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+    <mat-form-field>
+      <input
+      #doctorName="ngModel"
+      matInput
+      type="text"
+      name="doctorName"
+      ngModel
+      required
+      placeholder="Doctor's first and last name">
+      <mat-error *ngIf="doctorName.invalid">Please enter a doctor's name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      #patientName="ngModel"
+      matInput
+      type="text"
+      name="patientName"
+      ngModel
+      required
+      placeholder="Patient name">
+      <mat-error *ngIf="patientName.invalid">Please enter a patient's name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+      matInput
+      row="6"
+      name="treatment"
+      ngModel
+      placeholder="Treatment">
+      </textarea>
+    </mat-form-field>
+    <button
+      color="primary"
+      mat-raised-button
+      type="submit">Save Doctor</button>
+  </form>
 </mat-card>
-
-<hr/>
