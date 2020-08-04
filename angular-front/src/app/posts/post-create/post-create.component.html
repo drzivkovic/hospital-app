@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-form-field>
+    <input matInput type="text" [(ngModel)]="doctorName" placeholder="Doctor's first and last name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" [(ngModel)]="patientName" placeholder="Patient name">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput row="6" [(ngModel)]="treatment" placeholder="Treatment"></textarea>
+  </mat-form-field>
+  <button
+    color="primary"
+    mat-raised-button (click)="onAddPost()">Save Doctor</button>
+</mat-card>
+
+<hr/>
