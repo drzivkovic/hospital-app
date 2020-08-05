@@ -2,18 +2,24 @@ import { Injectable } from '@nestjs/common';
 
 export class Doctor {
   id: number;
-  name: string;
+  doctorsName: string;
+  patientsName: string;
+  treatment: string;
 }
 
 @Injectable()
 export class DoctorsService {
   doctors: Doctor[] = [{
     id: 1,
-    name: 'Ivan Zivkovic'
+    doctorsName: 'Ivan Zivkovic',
+    patientsName: 'Marko',
+    treatment: 'asdadasd'
   },
   {
     id: 2,
-    name: 'Tanja Labovic'
+    doctorsName: 'Tanja Labovic',
+    patientsName: 'Marko',
+    treatment: 'paracetamol'
   }];
 
   getDoctors(): Doctor[] {
@@ -23,16 +29,18 @@ export class DoctorsService {
   createDoctor(doctor: Doctor): Doctor {
     let newDoctor = new Doctor();
     newDoctor.id = this.doctors.length + 1;
-    newDoctor.name = doctor.name;
+    newDoctor.doctorsName = doctor.doctorsName;
+    newDoctor.patientsName = doctor.patientsName;
+    newDoctor.treatment = doctor.treatment;
     this.doctors.push(newDoctor);
     return newDoctor;
   }
 
-  updateDoctor(id: number, doctor: Doctor): Doctor {
-    let updateDoctor = this.doctors.find(d => d.id == id );
-    updateDoctor.name = doctor.name;
-    return updateDoctor;
-  }
+  // updateDoctor(id: number, doctor: Doctor): Doctor {
+  //   let updateDoctor = this.doctors.find(d => d.id == id );
+  //   updateDoctor.name = doctor.name;
+  //   return updateDoctor;
+  // }
 
   deleteDoctor(id: number) {
     this.doctors = this.doctors.filter(d => d.id != id);

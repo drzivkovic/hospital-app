@@ -1,5 +1,6 @@
 export interface Post {
-  doctorName: string;
-  patientName: string;
+  id: number;
+  doctorsName: string;
+  patientsName: string;
   treatment: string;
 }

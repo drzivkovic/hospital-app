@@ -20,10 +20,10 @@ export class DoctorsController {
       return this.doctorsService.createDoctor(doctor);
     }
   
-    @Put(':id')
-    updateProduct(@Param() params, @Body() doctor: Doctor) {
-      return this.doctorsService.updateDoctor(params.id, doctor);
-    }
+    // @Put(':id')
+    // updateProduct(@Param() params, @Body() doctor: Doctor) {
+    //   return this.doctorsService.updateDoctor(params.id, doctor);
+    // }
   
     @Delete(':id')
     deleteProduct(@Param() params) {

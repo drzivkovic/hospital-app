@@ -1,9 +1,9 @@
 <mat-accordion multi="true" *ngIf="posts.length > 0">
   <mat-expansion-panel *ngFor="let post of posts">
     <mat-expansion-panel-header>
-      Doctor: {{ post.doctorName }}
+      Doctor: {{ post.doctorsName }}
     </mat-expansion-panel-header>
-    <p>Patient: {{ post.patientName }}</p>
+    <p>Patient: {{ post.patientsName }}</p>
     <p>Treatment: {{ post.treatment }}</p>
   </mat-expansion-panel>
 </mat-accordion>
