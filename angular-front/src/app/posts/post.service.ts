@@ -24,8 +24,14 @@ export class PostService {
  }
 
  addPost(doctorName: string, patientName: string, treatment: string) {
-   const post: Post = { id: null, doctorsName: doctorName, patientsName: patientName, treatment: treatment};
-   this.posts.push(post);
-   this.postUpdated.next([...this.posts]);
+   const post: Post = { doctorsName: doctorName, patientsName: patientName, treatment: treatment};
+
+   this.http.post('http://localhost:3000/doctors', post)
+    .subscribe((responseData) =>
+    {
+      console.log(responseData);
+      this.posts.push(post);
+      this.postUpdated.next([...this.posts]);
+    });
  }
 }
