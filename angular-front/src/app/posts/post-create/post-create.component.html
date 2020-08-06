@@ -1,12 +1,12 @@
 <mat-card>
-  <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+  <form (submit)="onSavePost(postForm)" #postForm="ngForm">
     <mat-form-field>
       <input
       #doctorName="ngModel"
       matInput
       type="text"
       name="doctorName"
-      ngModel
+      [ngModel]="post?.doctorName"
       required
       placeholder="Doctor's first and last name">
       <mat-error *ngIf="doctorName.invalid">Please enter a doctor's name</mat-error>
@@ -17,7 +17,7 @@
       matInput
       type="text"
       name="patientName"
-      ngModel
+      [ngModel]="post?.patientName"
       required
       placeholder="Patient name">
       <mat-error *ngIf="patientName.invalid">Please enter a patient's name</mat-error>
@@ -27,7 +27,7 @@
       matInput
       row="6"
       name="treatment"
-      ngModel
+      [ngModel]="post?.treatment"
       placeholder="Treatment">
       </textarea>
     </mat-form-field>

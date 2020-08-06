@@ -1,24 +1,24 @@
 import { Injectable } from '@nestjs/common';
 
 export class Doctor {
-  id: number;
-  doctorsName: string;
-  patientsName: string;
+  id: string;
+  doctorName: string;
+  patientName: string;
   treatment: string;
 }
 
 @Injectable()
 export class DoctorsService {
   doctors: Doctor[] = [{
-    id: 1,
-    doctorsName: 'Ivan Zivkovic',
-    patientsName: 'Marko',
+    id: "1",
+    doctorName: 'Ivan Zivkovic',
+    patientName: 'Marko',
     treatment: 'asdadasd'
   },
   {
-    id: 2,
-    doctorsName: 'Tanja Labovic',
-    patientsName: 'Marko',
+    id: "2",
+    doctorName: 'Tanja Labovic',
+    patientName: 'Marko',
     treatment: 'paracetamol'
   }];
 
@@ -28,21 +28,24 @@ export class DoctorsService {
 
   createDoctor(doctor: Doctor): Doctor {
     let newDoctor = new Doctor();
-    newDoctor.id = this.doctors.length + 1;
-    newDoctor.doctorsName = doctor.doctorsName;
-    newDoctor.patientsName = doctor.patientsName;
+    newDoctor.id = String(this.doctors.length + 1);
+    newDoctor.doctorName = doctor.doctorName;
+    newDoctor.patientName = doctor.patientName;
     newDoctor.treatment = doctor.treatment;
     this.doctors.push(newDoctor);
     return newDoctor;
   }
 
-  // updateDoctor(id: number, doctor: Doctor): Doctor {
-  //   let updateDoctor = this.doctors.find(d => d.id == id );
-  //   updateDoctor.name = doctor.name;
-  //   return updateDoctor;
-  // }
+  updateDoctor(id: string, doctor: Doctor): Doctor {
+    let updateDoctor = this.doctors.find(d => d.id == id );
+    updateDoctor.doctorName = doctor.doctorName;
+    updateDoctor.patientName = doctor.patientName;
+    updateDoctor.treatment = doctor.treatment;
+    console.log(updateDoctor);
+    return updateDoctor;
+  }
 
-  deleteDoctor(id: number) {
+  deleteDoctor(id: string) {
     this.doctors = this.doctors.filter(d => d.id != id);
   }
 }

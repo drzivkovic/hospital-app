@@ -12,7 +12,7 @@ export class DoctorsController {
   
     @Get(':id') 
     getDoctor(@Param() params) {
-      return this.doctorsService.getDoctors().filter(p => p.id == params.id);
+      return this.doctorsService.getDoctors().filter(p => p.id == params.id)[0];
     }
   
     @Post()
@@ -20,10 +20,10 @@ export class DoctorsController {
       return this.doctorsService.createDoctor(doctor);
     }
   
-    // @Put(':id')
-    // updateProduct(@Param() params, @Body() doctor: Doctor) {
-    //   return this.doctorsService.updateDoctor(params.id, doctor);
-    // }
+    @Put(':id')
+    updateProduct(@Param() params, @Body() doctor: Doctor) {
+      return this.doctorsService.updateDoctor(params.id, doctor);
+    }
   
     @Delete(':id')
     deleteProduct(@Param() params) {

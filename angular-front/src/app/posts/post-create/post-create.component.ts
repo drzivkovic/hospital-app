@@ -1,22 +1,49 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { NgForm } from '@angular/forms';
 import { PostService } from "../post.service";
+import { ActivatedRoute, ParamMap } from "@angular/router";
+import { Post } from "../post.model";
 
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
   styleUrls: ['./post-create.componenet.css']
 })
-export class PostCreateComponent {
+export class PostCreateComponent implements OnInit{
   doctorName = '';
   patientName = '';
   treatment = '';
+  post: Post;
+  private mode = 'create';
+  private postId: string;
 
-  constructor(public postsService: PostService) {}
+  constructor(public postsService: PostService, public route: ActivatedRoute) {}
 
-  onAddPost(form: NgForm) {
+  ngOnInit() {
+    this.route.paramMap.subscribe((paramMap: ParamMap) =>
+    {
+      if (paramMap.has('postId')) {
+        this.mode = 'edit';
+        this.postId = paramMap.get('postId');
+        this.postsService.getPost(this.postId).subscribe((postData) =>{
+          this.post = {id: postData._id, doctorName: postData.doctorName, patientName: postData.patientName, treatment: postData.treatment};
+        });
+      }
+      else {
+        this.mode = 'create';
+        this.postId = null;
+      }
+    });
+  }
+
+  onSavePost(form: NgForm) {
     if (form.invalid) return;
 
-    this.postsService.addPost(form.value.doctorName, form.value.patientName, form.value.treatment);
+    if (this.mode === 'create'){
+      this.postsService.addPost(form.value.doctorName, form.value.patientName, form.value.treatment);
+    } else {
+      this.postsService.updatePost(this.postId, form.value.doctorName, form.value.patientName, form.value.treatment);
+    }
+    form.resetForm();
   }
 }
