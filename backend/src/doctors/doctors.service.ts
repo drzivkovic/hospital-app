@@ -28,11 +28,16 @@ export class DoctorsService {
 
   createDoctor(doctor: Doctor): Doctor {
     let newDoctor = new Doctor();
-    newDoctor.id = String(this.doctors.length + 1);
+    let lastInputId = 0;
+    if (this.doctors.length) {
+      lastInputId = parseInt(this.doctors[this.doctors.length - 1].id);
+    }
+    newDoctor.id = String(lastInputId+1);
     newDoctor.doctorName = doctor.doctorName;
     newDoctor.patientName = doctor.patientName;
     newDoctor.treatment = doctor.treatment;
     this.doctors.push(newDoctor);
+
     return newDoctor;
   }
 
