@@ -1,0 +1,8 @@
+{
+  "name": "IonicHospitalApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "c4162a27"
+}
