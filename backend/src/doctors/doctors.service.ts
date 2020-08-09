@@ -9,18 +9,7 @@ export class Doctor {
 
 @Injectable()
 export class DoctorsService {
-  doctors: Doctor[] = [{
-    id: "1",
-    doctorName: 'Ivan Zivkovic',
-    patientName: 'Marko',
-    treatment: 'asdadasd'
-  },
-  {
-    id: "2",
-    doctorName: 'Tanja Labovic',
-    patientName: 'Marko',
-    treatment: 'paracetamol'
-  }];
+  doctors: Doctor[] = [];
 
   getDoctors(): Doctor[] {
     return this.doctors;
@@ -46,7 +35,6 @@ export class DoctorsService {
     updateDoctor.doctorName = doctor.doctorName;
     updateDoctor.patientName = doctor.patientName;
     updateDoctor.treatment = doctor.treatment;
-    console.log(updateDoctor);
     return updateDoctor;
   }
 
