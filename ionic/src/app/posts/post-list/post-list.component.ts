@@ -9,11 +9,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./post-list.component.scss']
 })
 export class PostListComponent implements OnInit, OnDestroy {
-  // posts = [
-  //   {title: 'First post', contetn: 'This is the first post content'},
-  //   {title: 'Second post', contetn: 'This is the second post content'},
-  //   {title: 'Third post', contetn: 'This is the third post content'}
-  // ];
   posts: Post[] = [];
   isloading = false;
   private postsSub: Subscription;
@@ -21,11 +16,15 @@ export class PostListComponent implements OnInit, OnDestroy {
   constructor(public postsService: PostService) {}
 
   ngOnInit() {
+    // show loader
     this.isloading = true;
+    // get all the doctors
     this.postsService.getPosts();
     this.postsSub = this.postsService.getPostUpdateListener()
       .subscribe((posts: Post[]) => {
+        // hide loader
         this.isloading = false;
+        // populate the page with the list of all doctors
         this.posts = posts;
       });
   }
